@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kot z jajka</title>
+  <style>
+    body {
+      margin: 0;
+      background: #b3e5fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .scene {
+      position: relative;
+      width: 300px;
+      height: 400px;
+    }
+    .egg-top, .egg-bottom {
+      width: 200px;
+      height: 100px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: transform 0.6s ease;
+    }
+    .egg-top {
+      top: 80px;
+      background-image: url('images/egg_top.png');
+      z-index: 1;
+    }
+    .egg-bottom {
+      top: 170px;
+      background-image: url('images/egg_bottom.png');
+      z-index: 3;
+    }
+    .cat {
+      width: 120px;
+      height: 120px;
+      background-image: url('images/cat.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      bottom: 250px;
+      left: 50%;
+      transform: translate(-50%, 100%) rotate(0deg);
+      transition: transform 0.6s ease;
+      z-index: 2;
+    }
+    .lever {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: gold;
+      right: -60px;
+      bottom: 100px;
+      border-radius: 15px;
+      cursor: pointer;
+      z-index: 4;
+      box-shadow: 2px 2px 5px #000;
+    }
+    .lever::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -15px;
+      width: 60px;
+      height: 30px;
+      background: red;
+      border-radius: 15px;
+      border: 2px solid #900;
+    }
+    .active .egg-top {
+      transform: translateX(-50%) rotate(-40deg) translateY(-80px);
+    }
+    .active .cat {
+      transform: translate(-50%, -20%) rotate(-10deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" id="scene">
+    <div class="egg-top"></div>
+    <div class="egg-bottom"></div>
+    <div class="cat" id="cat"></div>
+    <div class="lever" id="lever"></div>
+  </div>
+  <audio id="meow-sound" src="https://www.fesliyanstudios.com/play-mp3/6558" preload="auto"></audio>
+  <script>
+    document.getElementById("lever").addEventListener("click", function () {
+      const scene = document.getElementById("scene");
+      const sound = document.getElementById("meow-sound");
+      scene.classList.toggle("active");
+      sound.currentTime = 0;
+      sound.play();
+    });
+  </script>
+</body>
+</html>
